@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Live BTC Transactions</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js">
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var count = 0;
+      var i = 0;
+
+      var socket = io.connect('http://localhost:7000');
+      socket.on('transaction', function (data) {
+        console.log(data);
+        count++;
+      });
+
+    setInterval(function() {
+      var div = document.getElementById('graph');
+      div.insertAdjacentHTML('beforeend', "<div class='node' style='left:"+i*10+"px; height: "+count*100+"px;'></div>");
+      count = 0;
+      i++;
+
+    }, 1000);
+
+    </script>
+    <style type="text/css">
+      body {
+        margin: 0px;
+      }
+      .graph {
+        width: 100%;
+        height: 300px;
+        background: red;
+        position: relative;
+      }
+      .node {
+        position: absolute;
+        bottom: 0px;
+        width: 10px;
+        margin-left: 5px;
+        background: green;
+      }
+    </style>
+  </head>
+  <body>
+    <p>Hello world! This is HTML5 Boilerplate.</p>
+    <div id="graph">
+    </div>
+    </div>
+    </div>
+
+  </body>
+</html>
